@@ -57,7 +57,7 @@ NUMBER_OF_THREADS is the threads to use per process (gpu), so optimally, it shou
 
 ## Testing
 
-- Testing using your trained model or our [pre-trained model](https://xxx) (voxel_size: 5cm):
+- Testing using your trained model or our [pre-trained model](https://drive.google.com/file/d/1AWUigQGDONoSpoPL5MCTE-tMFWhY2Y09/view?usp=sharing) (voxel_size: 5cm):
 ```sh tool/test.sh EXP_NAME /PATH/TO/CONFIG(copied one) NUMBER_OF_THREADS)```
 
 
