@@ -24,6 +24,7 @@ $ git checkout f1a419cc5792562a06df9e1da686b7ce8f3bb5ad
 $ python setup.py install
 # Others
 $ pip install imageio==2.8.0 opencv-python==4.2.0.32 pillow==7.0.0 pyyaml==5.3 scipy==1.4.1 sharedarray==3.2.0 tensorboardx==2.0 tqdm==4.42.1
+# Please refer to env.yml for details
 ```
 
 ## Prepare data
@@ -32,19 +33,54 @@ $ pip install imageio==2.8.0 opencv-python==4.2.0.32 pillow==7.0.0 pyyaml==5.3 s
 	
 - 3D: dataset/preprocess_3d_scannet.py
 
-## Usage
+## Config
+- BPNet_5cm: config/scannet/bpnet_5cm.yaml 
 
-- Train: ```sh tool/train.sh EXP_NAME /PATH/TO/CONFIG NUMBER_OF_THREADS```
-- Resume: ```sh tool/resume.sh EXP_NAME /PATH/TO/CONFIG(copied one) NUMBER_OF_THREADS```
-- Test: ```sh tool/test.sh EXP_NAME /PATH/TO/CONFIG(copied one) NUMBER_OF_THREADS)```
+## Training
+- Download pretrained 2D ResNets on ImageNet  from PyTorch website, and put them into the `initmodel` folder.
+```python
+model_urls = {
+    'resnet18': 'https://download.pytorch.org/models/resnet18-5c106cde.pth',
+    'resnet34': 'https://download.pytorch.org/models/resnet34-333f7ec4.pth',
+    'resnet50': 'https://download.pytorch.org/models/resnet50-19c8e357.pth',
+    'resnet101': 'https://download.pytorch.org/models/resnet101-5d3b4d8f.pth',
+    'resnet152': 'https://download.pytorch.org/models/resnet152-b121ed2d.pth',
+}
+```
+- Start training:
+```sh tool/train.sh EXP_NAME /PATH/TO/CONFIG NUMBER_OF_THREADS```
+
+- Resume: 
+```sh tool/resume.sh EXP_NAME /PATH/TO/CONFIG(copied one) NUMBER_OF_THREADS```
 
 NUMBER_OF_THREADS is the threads to use per process (gpu), so optimally, it should be **Total_threads / gpu_number_used**
 
-## Config
+## Testing
 
-- BPNet_5cm: config/scannet/bpnet.yaml 
+- Testing using your trained model or our [pre-trained model](https://xxx) (voxel_size: 5cm):
+```sh tool/test.sh EXP_NAME /PATH/TO/CONFIG(copied one) NUMBER_OF_THREADS)```
+
+
+## Copyright and License
+
+You are granted with the [LICENSE](./LICENSE) for both academic and commercial usages.
 
 
 
-## Still in cleaning process ... It will be finished before the conference.
+## Acknowledgment
+
+Our code is based on [MinkowskiEngine](https://github.com/NVIDIA/MinkowskiEngine). We also referred to [SparseConvNet](https://github.com/facebookresearch/SparseConvNet) and [semseg](https://github.com/hszhao/semseg).
+
+
+
+## Citation
+
+```tex
+@inproceedings{hu-2021-bidirectional,
+        author      = {Wenbo Hu, Hengshuang Zhao, Li Jiang, Jiaya Jia and Tien-Tsin Wong},
+        title       = {Bidirectional Projection Network for Cross Dimensional Scene Understanding},
+        booktitle   = {CVPR},
+        year        = {2021}
+    }
+```
 
