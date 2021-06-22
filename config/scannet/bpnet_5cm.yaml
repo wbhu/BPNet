@@ -1,0 +1,59 @@
+DATA:
+  data_name: scannet_cross
+  data_root: /research/dept6/wbhu/Dataset/ScanNet
+  classes: 20
+  aug: True
+  voxelSize: 0.05
+
+
+
+TRAIN:
+  viewNum: 3
+  weight_2d: 0.1
+  arch: bpnet
+  layers_2d: 34
+  arch_3d: MinkUNet18A
+
+  sync_bn_2d: True
+  ignore_label: 255
+  train_gpu: [0,1,2,3]
+  workers: 16  # data loader workers
+  batch_size: 16  # batch size for training
+  batch_size_val: 16  # batch size for validation during training, memory and speed tradeoff
+  base_lr: 0.01
+  loop: 5
+  epochs: 100
+  start_epoch: 0
+  power: 0.9
+  momentum: 0.9
+  weight_decay: 0.0001
+  manual_seed: 1463
+  print_freq: 10
+  save_freq: 1
+  save_path:
+  weight:  # path to initial weight (default: none)
+  resume:
+  evaluate: True  # evaluate on validation set, extra gpu memory needed and small batch_size_val is recommend
+  eval_freq: 1
+#  zoom_factor: 8  # zoom factor for final prediction during training, be in [1, 2, 4, 8]
+#  train_h: 241
+#  train_w: 321
+#  viewNum: 3
+
+Distributed:
+  dist_url: tcp://127.0.0.1:6787
+  dist_backend: 'nccl'
+  multiprocessing_distributed: True
+  world_size: 1
+  rank: 0
+
+
+TEST:
+  split: val  # split in [train, val and test]
+  val_benchmark: True
+  test_workers: 4
+  test_gpu: [0,1,2,3]
+  test_batch_size: 16
+  model_path:
+  save_folder:
+  test_repeats: 7
