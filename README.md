@@ -1,3 +1,5 @@
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/bidirectional-projection-network-for-cross/semantic-segmentation-on-scannet)](https://paperswithcode.com/sota/semantic-segmentation-on-scannet?p=bidirectional-projection-network-for-cross)
+
 # Bidirectional Projection Network for Cross Dimension Scene Understanding
 
 ***CVPR 2021 (Oral)***
